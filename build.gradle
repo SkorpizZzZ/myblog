@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id 'war'
+    id("io.freefair.lombok") version "8.13.1"
+    id "com.github.ben-manes.versions" version "0.52.0"
 }
 
 group = 'org.example'
@@ -9,9 +12,39 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    springMvcVersion = '6.2.1'
+    springJdbcVersion = '3.4.1'
+    mapstructVersion = '1.6.3'
+    logbackVersion = '1.4.14'
+    servletVersion = '4.0.2'
+}
+
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // Spring Core
+    implementation "org.springframework:spring-webmvc:$springMvcVersion"
+    implementation "org.springframework:spring-context:$springMvcVersion"
+    implementation "org.springframework.data:spring-data-jdbc:$springJdbcVersion"
+    implementation "org.springframework:spring-test:$springMvcVersion"
+
+    // MapStruct
+    implementation "org.mapstruct:mapstruct:$mapstructVersion"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
+
+    // Logging
+    implementation "ch.qos.logback:logback-classic:$logbackVersion"
+
+    // Servlet API
+    compileOnly "jakarta.servlet:jakarta.servlet-api:$servletVersion"
+
+    // Testing
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 test {
