@@ -13,19 +13,22 @@ repositories {
 }
 
 ext {
-    springMvcVersion = '6.2.1'
+    springVersion = '6.2.1'
     springJdbcVersion = '3.4.1'
     mapstructVersion = '1.6.3'
     logbackVersion = '1.4.14'
     servletVersion = '4.0.2'
+    postgresDriverVersion = '42.7.5'
+    thymeleafVersion = '3.1.2.RELEASE'
 }
 
 dependencies {
     // Spring Core
-    implementation "org.springframework:spring-webmvc:$springMvcVersion"
-    implementation "org.springframework:spring-context:$springMvcVersion"
+    implementation "org.springframework:spring-webmvc:$springVersion"
+    implementation "org.springframework:spring-context:$springVersion"
     implementation "org.springframework.data:spring-data-jdbc:$springJdbcVersion"
-    implementation "org.springframework:spring-test:$springMvcVersion"
+    implementation "org.springframework:spring-test:$springVersion"
+    implementation "org.postgresql:postgresql:$postgresDriverVersion"
 
     // MapStruct
     implementation "org.mapstruct:mapstruct:$mapstructVersion"
@@ -39,6 +42,9 @@ dependencies {
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+
+    //Thymeleaf
+    implementation "org.thymeleaf:thymeleaf-spring6:$thymeleafVersion"
 }
 
 java {
