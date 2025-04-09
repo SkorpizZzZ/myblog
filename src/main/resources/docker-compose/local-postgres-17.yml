@@ -1,0 +1,18 @@
+version: '3.8'
+name: yandex
+services:
+  postgres-db:
+    image: postgres:17
+    restart: on-failure
+    ports:
+      - "5438:5432"
+    environment:
+      POSTGRES_DB: yandex
+      POSTGRES_USER: yandex
+      POSTGRES_PASSWORD: yandex
+      POSTGRES_PORT: 5438
+    volumes:
+      - postgres-db-data:/var/lib/postgresql/data
+volumes:
+  postgres-db-data:
+    driver: local
