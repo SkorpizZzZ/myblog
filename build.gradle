@@ -20,6 +20,7 @@ ext {
     servletVersion = '4.0.2'
     postgresDriverVersion = '42.7.5'
     thymeleafVersion = '3.1.2.RELEASE'
+    langVersion = '3.0'
 }
 
 dependencies {
@@ -29,6 +30,9 @@ dependencies {
     implementation "org.springframework.data:spring-data-jdbc:$springJdbcVersion"
     implementation "org.springframework:spring-test:$springVersion"
     implementation "org.postgresql:postgresql:$postgresDriverVersion"
+
+    //Utils
+    implementation "org.apache.commons:commons-lang3:$langVersion"
 
     // MapStruct
     implementation "org.mapstruct:mapstruct:$mapstructVersion"
