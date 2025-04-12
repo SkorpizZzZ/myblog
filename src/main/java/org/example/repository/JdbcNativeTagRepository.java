@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.example.domain.Tag;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,12 +19,12 @@ public class JdbcNativeTagRepository implements TagRepository{
 
     @Override
     public List<Tag> findByPostId(Long postId) {
-        String query = """
+       final String QUERY = """
                 SELECT id, tag, post_id
                 FROM blog.tags
                 WHERE post_id = ?
                 """;
-        return jdbcTemplate.query(query, (rs, rowNum) -> new Tag(
+        return jdbcTemplate.query(QUERY, (rs, rowNum) -> new Tag(
                         rs.getLong("id"),
                         rs.getString("tag"),
                         rs.getLong("post_id")
@@ -34,12 +35,16 @@ public class JdbcNativeTagRepository implements TagRepository{
 
     @Override
     public void saveAll(String tags, Long postId) {
+        if (StringUtils.isBlank(tags)) {
+            return;
+        }
+
         String[] inputTags = tags.split(" ");
-        String query = """
+        final String QUERY = """
                 INSERT INTO blog.tags(tag, post_id)
                 VALUES (?, ?)
                 """;
-        jdbcTemplate.batchUpdate(query,
+        jdbcTemplate.batchUpdate(QUERY,
                 new BatchPreparedStatementSetter() {
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
@@ -48,7 +53,7 @@ public class JdbcNativeTagRepository implements TagRepository{
                     }
                     @Override
                     public int getBatchSize() {
-                        return 50;
+                        return inputTags.length;
                     }
                 });
     }

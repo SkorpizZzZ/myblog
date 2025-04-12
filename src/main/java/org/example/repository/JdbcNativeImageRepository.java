@@ -18,12 +18,12 @@ public class JdbcNativeImageRepository implements ImageRepository {
 
     @Override
     public String findPathByPostId(Long postId) {
-        String query = """
+        final String QUERY = """
                 SELECT path
                 FROM blog.images
                 WHERE post_id = ?
                 """;
-        return jdbcTemplate.queryForObject(query, String.class, postId);
+        return jdbcTemplate.queryForObject(QUERY, String.class, postId);
     }
 
     @Override

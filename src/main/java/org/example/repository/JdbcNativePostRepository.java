@@ -13,24 +13,24 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class JdbcNativePostRepository implements PostRepository{
+public class JdbcNativePostRepository implements PostRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
     @Override
     public Page<Post> findAll(Pageable pageable) {
-        String countQuery = """
+        final String COUNT_QUERY = """
                 SELECT count(*)
                 FROM blog.posts
                 """;
-        Integer countPosts = jdbcTemplate.queryForObject(countQuery, Integer.class);
+        Integer countPosts = jdbcTemplate.queryForObject(COUNT_QUERY, Integer.class);
 
-        String query = """
+       final String QUERY = """
                 SELECT id, title, text_preview, likes_count, text
                 FROM blog.posts
                 ORDER BY id DESC LIMIT ? OFFSET ?
                 """;
-        List<Post> posts = jdbcTemplate.query(query, (rs, rowNum) -> new Post(
+        List<Post> posts = jdbcTemplate.query(QUERY, (rs, rowNum) -> new Post(
                         rs.getLong("id"),
                         rs.getString("title"),
                         rs.getString("text_preview"),

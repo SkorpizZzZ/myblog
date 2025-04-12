@@ -15,12 +15,12 @@ public class JdbcNativeCommentRepository implements CommentRepository {
 
     @Override
     public List<Comment> findByPostId(Long postId) {
-        String query = """
+        final String QUERY = """
                 SELECT id, comment, post_id
                 FROM blog.comments
                 WHERE post_id = ?
                 """;
-        return jdbcTemplate.query(query, (rs, rowNum) -> new Comment(
+        return jdbcTemplate.query(QUERY, (rs, rowNum) -> new Comment(
                                 rs.getLong("id"),
                                 rs.getString("comment"),
                                 rs.getLong("post_id")
