@@ -8,11 +8,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,13 +37,18 @@ public class PostController {
         return "add-post";
     }
 
+    @GetMapping("/{id}")
+    public String post(@PathVariable("id") Long id) {
+        return "post";
+    }
+
     @PostMapping
     public String addPost(
             @RequestParam(name = "title") String title,
             @RequestParam(name = "image") MultipartFile image,
             @RequestParam(name = "tags") String tags,
             @RequestParam(name = "text") String text
-    ) {
+    ) throws IOException {
         postService.save(title, text, tags, image);
         return "redirect:/posts";
     }

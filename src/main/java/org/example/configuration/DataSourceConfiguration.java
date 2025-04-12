@@ -1,6 +1,7 @@
 package org.example.configuration;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.utils.TomcatUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,10 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Stream;
 
 
 @Configuration
@@ -51,8 +56,12 @@ public class DataSourceConfiguration {
 
     @EventListener
     @Order(2)
-    public void initDataBase(ContextRefreshedEvent event) {
+    public void initDataBase(ContextRefreshedEvent event) throws IOException {
         DataSource dataSource = event.getApplicationContext().getBean(DataSource.class);
+
+        if (!Files.exists(TomcatUtils.UPLOAD_PATH)) {
+            Files.createDirectories(TomcatUtils.UPLOAD_PATH);
+        }
 
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(new ClassPathResource("scripts/init.sql"));
@@ -60,11 +69,27 @@ public class DataSourceConfiguration {
     }
 
     @EventListener
-    public void clearDataBaseEvent(ContextClosedEvent event) {
+    public void clearDataBaseEvent(ContextClosedEvent event) throws IOException {
         DataSource dataSource = event.getApplicationContext().getBean(DataSource.class);
+
 
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(new ClassPathResource("scripts/clear_values.sql"));
         populator.execute(dataSource);
+        clearUploadDir();
+    }
+
+    private void clearUploadDir() throws IOException {
+        if (Files.exists(TomcatUtils.UPLOAD_PATH)) {
+            try (Stream<Path> paths = Files.list(TomcatUtils.UPLOAD_PATH)) {
+                paths.forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        throw new RuntimeException("Не удалось удалить: " + path, e);
+                    }
+                });
+            }
+        }
     }
 }

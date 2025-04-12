@@ -48,11 +48,11 @@ VALUES ('Результаты матчей РПЛ 6 апреля',
         '«Во время тренировок в начале сезона, когда ковидом переболел, выходил на тренировку и даже осложнения замечал по зрению. Один глаз видит, а второй не видит. Для меня это было максимально непросто, потому что очень сильно себя загонял. Здоровье на первом месте, гонки это гонки, но когда ты выходишь и понимаешь, что один глаз начинает видеть хуже, особенно когда чуть‑чуть темнеет. Думаешь, а нужно ли дальше?» — сказал Большунов в эфире «Матч ТВ».');
 
 INSERT INTO blog.images(path, post_id)
-VALUES ('images/football.jpg', 1),
-       ('images/hockey.png', 2),
-       ('images/tennis.png', 3),
-       ('images/boxing.png', 4),
-       ('images/basketball.png', 5),
-       ('images/f1.png', 6),
-       ('images/biatlon.png', 7),
-       ('images/ski.png', 8);
+VALUES ('/uploads/images/football.jpg', 1),
+       ('/uploads/images/hockey.png', 2),
+       ('/uploads/images/tennis.png', 3),
+       ('/uploads/images/boxing.png', 4),
+       ('/uploads/images/basketball.png', 5),
+       ('/uploads/images/f1.png', 6),
+       ('/uploads/images/biatlon.png', 7),
+       ('/uploads/images/ski.png', 8);

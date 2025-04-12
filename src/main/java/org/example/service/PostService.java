@@ -5,7 +5,6 @@ import org.example.domain.Comment;
 import org.example.domain.Post;
 import org.example.domain.Tag;
 import org.example.repository.CommentRepository;
-import org.example.repository.ImageRepository;
 import org.example.repository.PostRepository;
 import org.example.repository.TagRepository;
 import org.springframework.data.domain.Page;
@@ -13,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,7 +21,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
     private final TagRepository tagRepository;
-    private final ImageRepository imageRepository;
+    private final ImageService imageService;
 
     public Page<Post> findAll(Pageable pageable) {
         Page<Post> posts = postRepository.findAll(pageable);
@@ -41,9 +41,9 @@ public class PostService {
             String text,
             String tags,
             MultipartFile image
-    ) {
+    ) throws IOException {
         Long savedPostId = postRepository.save(title, text);
         tagRepository.saveAll(tags, savedPostId);
-        imageRepository.save(image, savedPostId);
+        imageService.saveImage(image, savedPostId);
     }
 }
