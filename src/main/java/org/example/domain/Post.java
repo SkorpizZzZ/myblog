@@ -16,8 +16,8 @@ public class Post {
     private final String textPreview;
     private final Long likesCount;
     private final String text;
-    private List<Comment> comments;
-    private List<Tag> tags;
+    private List<String> comments;
+    private List<String> tags;
 }
 
 
