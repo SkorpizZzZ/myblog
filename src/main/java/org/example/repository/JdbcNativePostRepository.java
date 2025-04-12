@@ -6,12 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -19,7 +16,6 @@ import java.util.Optional;
 public class JdbcNativePostRepository implements PostRepository{
 
     private final JdbcTemplate jdbcTemplate;
-    private final SimpleJdbcInsert simpleJdbcInsert;
 
     @Override
     public Page<Post> findAll(Pageable pageable) {
@@ -49,10 +45,15 @@ public class JdbcNativePostRepository implements PostRepository{
 
     @Override
     public Long save(String title, String text) {
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("title", title);
-        parameters.put("text", text);
+        final String QUERY = """
+                INSERT INTO blog.posts (title, text_preview, likes_count, text)
+                VALUES (?, ? ,? ,?)
+                RETURNING id
+                """;
+        return jdbcTemplate.queryForObject(QUERY, Long.class, title, makeTextPreview(text), 0, text);
+    }
 
-        return simpleJdbcInsert.executeAndReturnKey(parameters).longValue();
+    private String makeTextPreview(String text) {
+        return text.length() < 50 ? text : text.substring(0, 50).concat("...");
     }
 }
