@@ -10,7 +10,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
@@ -38,13 +37,6 @@ public class DataSourceConfiguration {
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
-    }
-
-    @Bean
-    public SimpleJdbcInsert simpleJdbcInsert(DataSource dataSource) {
-        return new SimpleJdbcInsert(dataSource)
-                .withTableName("posts")
-                .usingGeneratedKeyColumns("id");
     }
 
     @EventListener
