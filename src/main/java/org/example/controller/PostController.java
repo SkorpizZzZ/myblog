@@ -39,12 +39,13 @@ public class PostController {
     }
 
     @PostMapping
-    public void addPost(
-            @RequestParam String title,
-            @RequestParam String text,
-            @RequestParam String tags,
-            @RequestParam MultipartFile image
+    public String addPost(
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "image") MultipartFile image,
+            @RequestParam(name = "tags") String tags,
+            @RequestParam(name = "text") String text
     ) {
         postService.save(title, text, tags, image);
+        return "redirect:/posts";
     }
 }
