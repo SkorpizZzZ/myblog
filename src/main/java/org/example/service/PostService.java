@@ -1,7 +1,9 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.domain.Comment;
 import org.example.domain.Post;
+import org.example.domain.Tag;
 import org.example.repository.CommentRepository;
 import org.example.repository.ImageRepository;
 import org.example.repository.PostRepository;
@@ -10,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +26,12 @@ public class PostService {
     public Page<Post> findAll(Pageable pageable) {
         Page<Post> posts = postRepository.findAll(pageable);
         posts.forEach(post -> {
-            post.setComments(commentRepository.findByPostId(post.getId()));
-            post.setTags(tagRepository.findByPostId(post.getId()));
+            post.setComments(commentRepository.findByPostId(post.getId()).stream()
+                    .map(Comment::getComment)
+                    .collect(Collectors.toList()));
+            post.setTags(tagRepository.findByPostId(post.getId()).stream()
+                    .map(Tag::getTag)
+                    .collect(Collectors.toList()));
         });
         return posts;
     }
