@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class JdbcNativeImageRepository implements ImageRepository {
@@ -11,13 +13,14 @@ public class JdbcNativeImageRepository implements ImageRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public String findPathByPostId(Long postId) {
+    public Optional<String> findPathByPostId(Long postId) {
         final String QUERY = """
                 SELECT path
                 FROM blog.images
                 WHERE post_id = ?
                 """;
-        return jdbcTemplate.queryForObject(QUERY, String.class, postId);
+        return jdbcTemplate.query(QUERY, (rs, rowNum) -> rs.getString("path"), postId).stream()
+                .findFirst();
     }
 
     @Override
@@ -28,5 +31,14 @@ public class JdbcNativeImageRepository implements ImageRepository {
                 """;
         String relativePath = "/uploads/images/" + fileName;
         jdbcTemplate.update(QUERY, relativePath, postId);
+    }
+
+    @Override
+    public void deleteByPostId(Long postId) {
+        final String QUERY = """
+                DELETE FROM blog.images
+                WHERE post_id = ?
+                """;
+        jdbcTemplate.update(QUERY, postId);
     }
 }

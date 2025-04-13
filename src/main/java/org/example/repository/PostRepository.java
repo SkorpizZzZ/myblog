@@ -1,11 +1,25 @@
 package org.example.repository;
 
-import org.example.domain.Post;
+import org.example.domain.PostEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface PostRepository {
-    Page<Post> findAll(Pageable pageable);
+import java.util.Optional;
 
-    Long save(String title, String text);
+public interface PostRepository {
+    Page<PostEntity> findAll(Pageable pageable);
+
+    Long save(String title, String text, String textPreview);
+
+    Long update(Long id, String title, String text, String textPreview);
+
+    Optional<PostEntity> findById(Long id);
+
+    void delete(Long id);
+
+    void like(Long postId);
+
+    void dislike(Long postId);
+
+    Page<PostEntity> findAllByTag(Pageable pageable, String tag);
 }

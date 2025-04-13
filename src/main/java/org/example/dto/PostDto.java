@@ -1,9 +1,7 @@
 package org.example.dto;
 
-import org.example.domain.Comment;
-import org.example.domain.Tag;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 public record PostDto(
         Long id,
@@ -11,7 +9,12 @@ public record PostDto(
         String textPreview,
         Long likesCount,
         String text,
-        List<Comment> comments,
-        List<Tag> tags
+        List<CommentDto> comments,
+        List<TagDto> tags
 ) {
+   public String getTagsAsText() {
+     return tags.stream()
+             .map(TagDto::tag)
+             .collect(Collectors.joining(" "));
+    }
 }

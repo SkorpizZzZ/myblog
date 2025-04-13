@@ -7,8 +7,8 @@ import lombok.*;
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(exclude = "id")
-public class Image {
+public class TagEntity {
     private final Long id;
-    private final String path;
+    private final String tag;
     private final Long postId;
 }

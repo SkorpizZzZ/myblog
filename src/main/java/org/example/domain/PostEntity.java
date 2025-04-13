@@ -10,14 +10,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(exclude = "id")
-public class Post {
+public class PostEntity {
     private final Long id;
     private final String title;
     private final String textPreview;
     private final Long likesCount;
     private final String text;
-    private List<String> comments;
-    private List<String> tags;
+    private List<CommentEntity> comments;
+    private List<TagEntity> tags;
 }
 
 

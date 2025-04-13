@@ -7,8 +7,8 @@ import lombok.*;
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(exclude = "id")
-public class Tag {
+public class CommentEntity {
     private final Long id;
-    private final String tag;
+    private final String comment;
     private final Long postId;
 }

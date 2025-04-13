@@ -2,7 +2,7 @@ package org.example.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.example.domain.Tag;
+import org.example.domain.TagEntity;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,13 +18,13 @@ public class JdbcNativeTagRepository implements TagRepository{
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Tag> findByPostId(Long postId) {
+    public List<TagEntity> findByPostId(Long postId) {
        final String QUERY = """
                 SELECT id, tag, post_id
                 FROM blog.tags
                 WHERE post_id = ?
                 """;
-        return jdbcTemplate.query(QUERY, (rs, rowNum) -> new Tag(
+        return jdbcTemplate.query(QUERY, (rs, rowNum) -> new TagEntity(
                         rs.getLong("id"),
                         rs.getString("tag"),
                         rs.getLong("post_id")
@@ -56,5 +56,14 @@ public class JdbcNativeTagRepository implements TagRepository{
                         return inputTags.length;
                     }
                 });
+    }
+
+    @Override
+    public void deleteByPostId(Long postId) {
+        final String QUERY = """
+                DELETE FROM blog.tags
+                WHERE post_id = ?
+                """;
+        jdbcTemplate.update(QUERY, postId);
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,8 +21,8 @@ public class ImageController {
     private final ImageService imageService;
 
     @GetMapping(path = "/{id}", produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<Resource> image(@PathVariable("id") Long id) throws FileNotFoundException {
-        File file = imageService.getImage(id);
+    public ResponseEntity<Resource> image(@PathVariable("id") Long id) {
+        File file = imageService.getImageByPostId(id);
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
                 .body(new FileSystemResource(file));

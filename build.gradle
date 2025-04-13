@@ -29,6 +29,8 @@ dependencies {
     implementation "org.springframework:spring-context:$springVersion"
     implementation "org.springframework.data:spring-data-jdbc:$springJdbcVersion"
     implementation "org.springframework:spring-test:$springVersion"
+
+    //DB
     implementation "org.postgresql:postgresql:$postgresDriverVersion"
 
     //Utils
