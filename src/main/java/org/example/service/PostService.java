@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.example.domain.PostEntity;
 import org.example.dto.PostDto;
 import org.example.mapper.CommentEntityMapper;
-import org.example.mapper.ImageEntityMapper;
 import org.example.mapper.PostEntityMapper;
 import org.example.mapper.TagEntityMapper;
 import org.example.repository.PostRepository;
@@ -29,18 +28,17 @@ public class PostService {
     private final PostEntityMapper postEntityMapper;
     private final CommentEntityMapper commentEntityMapper;
     private final TagEntityMapper tagEntityMapper;
-    private final ImageEntityMapper imageEntityMapper;
 
 
     public Page<PostDto> findAll(Pageable pageable, String tag) {
         if (StringUtils.isNotBlank(tag)) {
-         return postRepository.findAllByTag(pageable, tag).map(post -> collectPostDto(post, post.getId()));
+         return postRepository.findAllByTag(pageable, tag).map(post -> collectPostAttributes(post, post.getId()));
         } else {
-            return postRepository.findAll(pageable).map(post -> collectPostDto(post, post.getId()));
+            return postRepository.findAll(pageable).map(post -> collectPostAttributes(post, post.getId()));
         }
     }
 
-    private PostDto collectPostDto(PostEntity post, Long postId) {
+    private PostDto collectPostAttributes(PostEntity post, Long postId) {
         post.setComments(commentService.findByPostId(postId).stream()
                 .map(commentEntityMapper::commentDtoToCommentEntity)
                 .toList());
@@ -72,7 +70,7 @@ public class PostService {
                 .orElseThrow(() -> new RuntimeException(
                         MessageFormat.format("Post с идентификатором {0} не найден", id)
                 ));
-        return collectPostDto(post, id);
+        return collectPostAttributes(post, id);
     }
 
     private String makeTextPreview(String text) {

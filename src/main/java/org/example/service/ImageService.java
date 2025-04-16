@@ -22,7 +22,7 @@ public class ImageService {
     private final ImageRepository imageRepository;
 
     @Transactional
-    public void saveImage(MultipartFile image, Long savedPostId) {
+    public void saveImage(MultipartFile image, Long postId) {
         if (!image.isEmpty()) {
             String fileName = image.getOriginalFilename();
             Path filePath = TomcatUtils.UPLOAD_PATH.resolve(fileName);
@@ -31,10 +31,10 @@ public class ImageService {
                 Files.write(filePath, image.getBytes());
             } catch (IOException e) {
                 throw new RuntimeException(
-                        MessageFormat.format("Не удалось сохранить Image для поста под id {}", savedPostId)
+                        MessageFormat.format("Не удалось сохранить Image для поста под id {0}", postId)
                 );
             }
-            imageRepository.save(fileName, savedPostId);
+            imageRepository.save(fileName, postId);
         }
     }
 

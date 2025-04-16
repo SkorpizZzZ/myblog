@@ -48,6 +48,8 @@ dependencies {
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.17.0'
+    testImplementation 'org.assertj:assertj-core:3.27.3'
 
     //Thymeleaf
     implementation "org.thymeleaf:thymeleaf-spring6:$thymeleafVersion"

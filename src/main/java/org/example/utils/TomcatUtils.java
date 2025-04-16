@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 @UtilityClass
 public class TomcatUtils {
 
-   public final Path UPLOAD_PATH = getUploadPath();
+   public Path UPLOAD_PATH = getUploadPath();
 
     private Path getUploadPath() {
         String tomcatDir = System.getProperty("catalina.base");
