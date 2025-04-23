@@ -22,7 +22,7 @@ public class ImageController {
 
     @GetMapping(path = "/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<Resource> image(@PathVariable("id") Long id) {
-        File file = imageService.getImageByPostId(id);
+        File file = imageService.findImageByPostId(id);
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
                 .body(new FileSystemResource(file));

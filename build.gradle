@@ -17,10 +17,11 @@ ext {
     springJdbcVersion = '3.4.1'
     mapstructVersion = '1.6.3'
     logbackVersion = '1.4.14'
-    servletVersion = '4.0.2'
+    servletVersion = '6.0.0'
     postgresDriverVersion = '42.7.5'
     thymeleafVersion = '3.1.2.RELEASE'
     langVersion = '3.0'
+    testContainer = '1.17.6'
 }
 
 dependencies {
@@ -29,6 +30,10 @@ dependencies {
     implementation "org.springframework:spring-context:$springVersion"
     implementation "org.springframework.data:spring-data-jdbc:$springJdbcVersion"
     implementation "org.springframework:spring-test:$springVersion"
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+
+    // Servlet API
+    implementation "jakarta.servlet:jakarta.servlet-api:$servletVersion"
 
     //DB
     implementation "org.postgresql:postgresql:$postgresDriverVersion"
@@ -43,13 +48,13 @@ dependencies {
     // Logging
     implementation "ch.qos.logback:logback-classic:$logbackVersion"
 
-    // Servlet API
-    compileOnly "jakarta.servlet:jakarta.servlet-api:$servletVersion"
-
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.17.0'
     testImplementation 'org.assertj:assertj-core:3.27.3'
+    testImplementation 'org.hamcrest:hamcrest:2.1'
+    testImplementation "org.testcontainers:postgresql:$testContainer"
+    testImplementation "org.testcontainers:junit-jupiter:$testContainer"
 
     //Thymeleaf
     implementation "org.thymeleaf:thymeleaf-spring6:$thymeleafVersion"
