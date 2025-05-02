@@ -1,7 +1,7 @@
 package org.example.integration.controller;
 
-import org.example.myblogspringboot.configuration.DataSourceConfiguration;
 import org.example.configuration.TestConfiguration;
+import org.example.myblogspringboot.configuration.DataSourceConfiguration;
 import org.example.myblogspringboot.service.ImageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         }
 )
 @TestPropertySource("classpath:application-test.properties")
-public class ImageControllerTest {
+public class ImageControllerIT {
 
     @Autowired
     private WebApplicationContext webApplicationContext;

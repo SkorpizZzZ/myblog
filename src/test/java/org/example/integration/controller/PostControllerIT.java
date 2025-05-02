@@ -1,8 +1,8 @@
 package org.example.integration.controller;
 
 import org.example.configuration.AbstractIntegrationTest;
-import org.example.myblogspringboot.configuration.DataSourceConfiguration;
 import org.example.configuration.TestConfiguration;
+import org.example.myblogspringboot.configuration.DataSourceConfiguration;
 import org.example.myblogspringboot.configuration.ThymeleafConfiguration;
 import org.example.myblogspringboot.dto.CommentDto;
 import org.example.myblogspringboot.dto.PostDto;
@@ -48,7 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 )
 @Testcontainers
 @TestPropertySource("classpath:application-test.properties")
-public class PostControllerTest extends AbstractIntegrationTest {
+public class PostControllerIT extends AbstractIntegrationTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
