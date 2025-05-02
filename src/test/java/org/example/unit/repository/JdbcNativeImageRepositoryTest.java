@@ -1,6 +1,6 @@
 package org.example.unit.repository;
 
-import org.example.repository.JdbcNativeImageRepository;
+import org.example.myblogspringboot.repository.JdbcNativeImageRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

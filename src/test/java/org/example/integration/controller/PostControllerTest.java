@@ -1,16 +1,16 @@
 package org.example.integration.controller;
 
 import org.example.configuration.AbstractIntegrationTest;
-import org.example.configuration.DataSourceConfiguration;
+import org.example.myblogspringboot.configuration.DataSourceConfiguration;
 import org.example.configuration.TestConfiguration;
-import org.example.configuration.ThymeleafConfiguration;
-import org.example.dto.CommentDto;
-import org.example.dto.PostDto;
-import org.example.dto.TagDto;
-import org.example.service.CommentService;
-import org.example.service.FileService;
-import org.example.service.PostService;
-import org.example.service.TagService;
+import org.example.myblogspringboot.configuration.ThymeleafConfiguration;
+import org.example.myblogspringboot.dto.CommentDto;
+import org.example.myblogspringboot.dto.PostDto;
+import org.example.myblogspringboot.dto.TagDto;
+import org.example.myblogspringboot.service.CommentService;
+import org.example.myblogspringboot.service.FileService;
+import org.example.myblogspringboot.service.PostService;
+import org.example.myblogspringboot.service.TagService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package org.example.integration.controller;
 
-import org.example.configuration.DataSourceConfiguration;
+import org.example.myblogspringboot.configuration.DataSourceConfiguration;
 import org.example.configuration.TestConfiguration;
-import org.example.service.ImageService;
+import org.example.myblogspringboot.service.ImageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

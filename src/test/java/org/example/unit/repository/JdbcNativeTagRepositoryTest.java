@@ -1,7 +1,7 @@
 package org.example.unit.repository;
 
-import org.example.domain.TagEntity;
-import org.example.repository.JdbcNativeTagRepository;
+import org.example.myblogspringboot.domain.TagEntity;
+import org.example.myblogspringboot.repository.JdbcNativeTagRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

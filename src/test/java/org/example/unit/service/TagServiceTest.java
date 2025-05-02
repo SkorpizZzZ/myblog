@@ -1,10 +1,10 @@
 package org.example.unit.service;
 
-import org.example.domain.TagEntity;
-import org.example.dto.TagDto;
-import org.example.mapper.TagEntityMapper;
-import org.example.repository.TagRepository;
-import org.example.service.TagService;
+import org.example.myblogspringboot.domain.TagEntity;
+import org.example.myblogspringboot.dto.TagDto;
+import org.example.myblogspringboot.mapper.TagEntityMapper;
+import org.example.myblogspringboot.repository.TagRepository;
+import org.example.myblogspringboot.service.TagService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

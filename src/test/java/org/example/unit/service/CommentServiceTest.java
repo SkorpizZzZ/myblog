@@ -1,10 +1,10 @@
 package org.example.unit.service;
 
-import org.example.domain.CommentEntity;
-import org.example.dto.CommentDto;
-import org.example.mapper.CommentEntityMapper;
-import org.example.repository.CommentRepository;
-import org.example.service.CommentService;
+import org.example.myblogspringboot.domain.CommentEntity;
+import org.example.myblogspringboot.dto.CommentDto;
+import org.example.myblogspringboot.mapper.CommentEntityMapper;
+import org.example.myblogspringboot.repository.CommentRepository;
+import org.example.myblogspringboot.service.CommentService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

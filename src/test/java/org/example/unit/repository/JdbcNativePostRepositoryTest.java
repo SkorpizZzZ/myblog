@@ -1,7 +1,7 @@
 package org.example.unit.repository;
 
-import org.example.domain.PostEntity;
-import org.example.repository.JdbcNativePostRepository;
+import org.example.myblogspringboot.domain.PostEntity;
+import org.example.myblogspringboot.repository.JdbcNativePostRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

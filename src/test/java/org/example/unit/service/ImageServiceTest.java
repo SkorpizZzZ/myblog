@@ -1,8 +1,8 @@
 package org.example.unit.service;
 
-import org.example.repository.ImageRepository;
-import org.example.service.FileService;
-import org.example.service.ImageService;
+import org.example.myblogspringboot.repository.ImageRepository;
+import org.example.myblogspringboot.service.FileService;
+import org.example.myblogspringboot.service.ImageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

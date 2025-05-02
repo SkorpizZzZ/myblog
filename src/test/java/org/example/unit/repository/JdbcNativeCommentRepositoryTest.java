@@ -1,7 +1,7 @@
 package org.example.unit.repository;
 
-import org.example.domain.CommentEntity;
-import org.example.repository.JdbcNativeCommentRepository;
+import org.example.myblogspringboot.domain.CommentEntity;
+import org.example.myblogspringboot.repository.JdbcNativeCommentRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
