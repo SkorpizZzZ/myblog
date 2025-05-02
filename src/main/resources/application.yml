@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5438/yandex
+    username: yandex
+    password: yandex
+    driver: org.postgresql.Driver
+
+imageDir: images
+appBaseDir: catalina.base
+clearUploadDir: false
+
+logging:
+  level.org.springframework:
+    jdbc: DEBUG
