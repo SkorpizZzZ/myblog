@@ -11,7 +11,7 @@ spring:
     driver: org.postgresql.Driver
 
 imageDir: images
-appBaseDir: catalina.base
+appBaseDir: user.dir
 clearUploadDir: false
 
 logging:

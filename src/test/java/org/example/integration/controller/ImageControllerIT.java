@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 TestConfiguration.class
         }
 )
-@TestPropertySource("classpath:application-test.properties")
+@TestPropertySource("classpath:application-test.yml")
 public class ImageControllerIT {
 
     @Autowired
