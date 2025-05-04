@@ -1,4 +1,4 @@
-package org.example.unit.service;
+package org.example.myblogspringboot.unit.service;
 
 import org.example.myblogspringboot.domain.TagEntity;
 import org.example.myblogspringboot.dto.TagDto;

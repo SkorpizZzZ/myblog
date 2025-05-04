@@ -1,15 +1,13 @@
-package org.example.integration.controller;
+package org.example.myblogspringboot.integration.controller;
 
-import org.example.configuration.TestConfiguration;
-import org.example.myblogspringboot.configuration.DataSourceConfiguration;
+import org.example.myblogspringboot.controller.ImageController;
 import org.example.myblogspringboot.service.ImageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -25,13 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringJUnitWebConfig(
-        classes = {
-                DataSourceConfiguration.class,
-                TestConfiguration.class
-        }
-)
-@TestPropertySource("classpath:application-test.yml")
+@WebMvcTest(ImageController.class)
 public class ImageControllerIT {
 
     @Autowired

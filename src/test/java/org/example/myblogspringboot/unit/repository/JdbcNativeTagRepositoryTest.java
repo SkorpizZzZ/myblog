@@ -1,4 +1,4 @@
-package org.example.unit.repository;
+package org.example.myblogspringboot.unit.repository;
 
 import org.example.myblogspringboot.domain.TagEntity;
 import org.example.myblogspringboot.repository.JdbcNativeTagRepository;

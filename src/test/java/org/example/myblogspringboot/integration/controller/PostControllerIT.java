@@ -1,12 +1,9 @@
-package org.example.integration.controller;
+package org.example.myblogspringboot.integration.controller;
 
-import org.example.configuration.AbstractIntegrationTest;
-import org.example.configuration.TestConfiguration;
-import org.example.myblogspringboot.configuration.DataSourceConfiguration;
-import org.example.myblogspringboot.configuration.ThymeleafConfiguration;
 import org.example.myblogspringboot.dto.CommentDto;
 import org.example.myblogspringboot.dto.PostDto;
 import org.example.myblogspringboot.dto.TagDto;
+import org.example.myblogspringboot.integration.controller.configuration.AbstractIntegrationTest;
 import org.example.myblogspringboot.service.CommentService;
 import org.example.myblogspringboot.service.FileService;
 import org.example.myblogspringboot.service.PostService;
@@ -14,19 +11,13 @@ import org.example.myblogspringboot.service.TagService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
-import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.context.WebApplicationContext;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
-import javax.sql.DataSource;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -39,15 +30,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringJUnitWebConfig(
-        classes = {
-                DataSourceConfiguration.class,
-                TestConfiguration.class,
-                ThymeleafConfiguration.class
-        }
-)
-@Testcontainers
-@TestPropertySource("classpath:application-test.yml")
 public class PostControllerIT extends AbstractIntegrationTest {
 
     @Autowired
@@ -69,13 +51,6 @@ public class PostControllerIT extends AbstractIntegrationTest {
                 .defaultResponseCharacterEncoding(StandardCharsets.UTF_8)
                 .alwaysDo(print())
                 .build();
-        DataSource dataSource = webApplicationContext.getBean(DataSource.class);
-
-        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-        populator.addScript(new ClassPathResource("scripts/schema.sql"));
-        populator.addScript(new ClassPathResource("scripts/clear_values.sql"));
-        populator.addScript(new ClassPathResource("scripts/init.sql"));
-        populator.execute(dataSource);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package org.example.unit.repository;
+package org.example.myblogspringboot.unit.repository;
 
 import org.example.myblogspringboot.repository.JdbcNativeImageRepository;
 import org.junit.jupiter.api.Test;

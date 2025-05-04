@@ -127,7 +127,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <buildInfo/>
                     <executable>
                         true
                     </executable>
@@ -154,7 +153,7 @@
                     </executions>
                     <configuration>
                         <includes>
-                            <include>**/*IT.java</include> <!-- Запускает только тесты, оканчивающиеся на IT -->
+                            <include>**/*IT.java</include>
                         </includes>
                         <systemPropertyVariables>
                             <spring.profiles.active>test</spring.profiles.active>

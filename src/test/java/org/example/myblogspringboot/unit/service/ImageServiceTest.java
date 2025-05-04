@@ -1,4 +1,4 @@
-package org.example.unit.service;
+package org.example.myblogspringboot.unit.service;
 
 import org.example.myblogspringboot.repository.ImageRepository;
 import org.example.myblogspringboot.service.FileService;

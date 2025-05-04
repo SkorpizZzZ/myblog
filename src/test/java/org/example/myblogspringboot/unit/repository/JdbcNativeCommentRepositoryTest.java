@@ -1,4 +1,4 @@
-package org.example.unit.repository;
+package org.example.myblogspringboot.unit.repository;
 
 import org.example.myblogspringboot.domain.CommentEntity;
 import org.example.myblogspringboot.repository.JdbcNativeCommentRepository;
